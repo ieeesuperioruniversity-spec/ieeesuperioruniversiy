@@ -7,13 +7,11 @@ import { SiteHeader } from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.ieeecssuperioruniversity.com"),
-  title: "IEEE Computer Society | Superior University Lahore",
-  description:
-    "Official IEEE Computer Society student branch at Superior University, Lahore. Explore our events, student teams, collaborations, and certificate verification.",
+  title: "IEEE CS Superior University",
+  description: "Official Website for IEEE Computer Society Superior University",
   openGraph: {
-    title: "IEEE Computer Society | Superior University Lahore",
-    description:
-      "Official IEEE Computer Society student branch at Superior University, Lahore. Explore our events, student teams, collaborations, and certificate verification.",
+    title: "IEEE CS Superior University",
+    description: "Official Website for IEEE Computer Society Superior University",
     siteName: "IEEE CS Superior University",
     locale: "en_PK",
     type: "website",
