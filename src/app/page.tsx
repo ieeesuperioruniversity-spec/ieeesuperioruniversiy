@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Code2, HeartHandshake, ShieldCheck, UsersRound } from "lucide-react";
@@ -5,6 +6,10 @@ import { GalleryCarousel } from "@/components/Carousel";
 import { CollaborationTicker } from "@/components/CollaborationTicker";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 const impactCards = [
   {

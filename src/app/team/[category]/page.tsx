@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   return {
     title: category ? `${category.name} | IEEE CS Superior University` : "Our Team",
     description: category?.description,
+    alternates: { canonical: `/team/${slug}` },
   };
 }
 
