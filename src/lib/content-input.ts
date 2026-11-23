@@ -115,18 +115,20 @@ export async function parseLeadershipMemberForm(form: FormData): Promise<ParseRe
   const name = text(form, "name", "Name", 100);
   const role = text(form, "role", "Role", 100);
   const tenure = text(form, "tenure", "Tenure line", 120);
+  const description = text(form, "description", "Description", 2000, false);
   const rawOrder = text(form, "displayOrder", "Display order", 4);
   const uploadedImage = await parseImage(form);
   if (!name.ok) return name;
   if (!role.ok) return role;
   if (!tenure.ok) return tenure;
+  if (!description.ok) return description;
   if (!rawOrder.ok) return rawOrder;
   if (!uploadedImage.ok) return uploadedImage;
   const displayOrder = Number.parseInt(rawOrder.value, 10);
   if (!Number.isInteger(displayOrder) || displayOrder < 0 || displayOrder > 999) {
     return { ok: false, error: "Display order must be between 0 and 999" };
   }
-  return { ok: true, value: { name: name.value, role: role.value, tenure: tenure.value, displayOrder, image: uploadedImage.value } };
+  return { ok: true, value: { name: name.value, role: role.value, tenure: tenure.value, description: description.value, displayOrder, image: uploadedImage.value } };
 }
 
 export function parseContactSettingsForm(form: FormData): ParseResult<{ phoneNumber: string }> {

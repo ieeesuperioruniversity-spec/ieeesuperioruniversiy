@@ -12,6 +12,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { listPublicLeadershipMembers } from "@/lib/public-content";
+import { PublicLeadershipGrid } from "@/components/PublicLeadershipGrid";
 
 export const revalidate = 60;
 
@@ -97,22 +98,7 @@ export default async function AboutPage() {
         {leadership.length === 0 ? (
           <div className="leadershipEmpty"><UsersRound size={28} /><p>Leadership profiles will be published soon.</p></div>
         ) : (
-          <div className="customLeaderGrid">
-            {leadership.map((member) => (
-              <article className="leaderCard customLeaderCard" key={member.id}>
-                <div className={`leadershipPortrait${member.imageUrl ? " hasImage" : ""}`}>
-                  {member.imageUrl ? (
-                    <Image src={member.imageUrl} alt={`${member.name}, ${member.role}`} fill loading="lazy" sizes="(max-width: 640px) 72vw, 240px" />
-                  ) : <UsersRound size={42} />}
-                </div>
-                <div className="leadershipDetails">
-                  <h3>{member.name}</h3>
-                  <p>{member.role}</p>
-                  <small>{member.tenure}</small>
-                </div>
-              </article>
-            ))}
-          </div>
+          <PublicLeadershipGrid members={leadership} />
         )}
       </section>
 

@@ -47,6 +47,7 @@ interface LeadershipMemberDocument {
   name: string;
   role: string;
   tenure: string;
+  description?: string;
   displayOrder: number;
   image?: Binary;
   imageMimeType?: ContentImageMimeType;
@@ -94,6 +95,7 @@ export interface LeadershipMemberInput {
   name: string;
   role: string;
   tenure: string;
+  description: string;
   displayOrder: number;
   image?: { data: Uint8Array; mimeType: ContentImageMimeType };
 }
@@ -210,6 +212,7 @@ function serializeLeadershipMember(document: WithId<LeadershipMemberDocument>): 
     name: document.name,
     role: document.role,
     tenure: document.tenure,
+    description: document.description || "",
     displayOrder: document.displayOrder,
     ...(hasImage ? { imageUrl: `/api/leadership/${id}/image?v=${document.updatedAt.getTime()}` } : {}),
     createdAt: document.createdAt.toISOString(),
@@ -359,6 +362,7 @@ export async function createLeadershipMember(input: LeadershipMemberInput): Prom
     name: input.name,
     role: input.role,
     tenure: input.tenure,
+    description: input.description,
     displayOrder: input.displayOrder,
     ...imageFields(input.image),
     createdAt: now,
@@ -374,7 +378,7 @@ export async function updateLeadershipMember(id: string, input: LeadershipMember
   const collection = await leadershipCollection();
   const document = await collection.findOneAndUpdate(
     { _id },
-    { $set: { name: input.name, role: input.role, tenure: input.tenure, displayOrder: input.displayOrder, ...imageFields(input.image), updatedAt: new Date() } },
+    { $set: { name: input.name, role: input.role, tenure: input.tenure, description: input.description, displayOrder: input.displayOrder, ...imageFields(input.image), updatedAt: new Date() } },
     { returnDocument: "after" },
   );
   return document ? serializeLeadershipMember(document) : null;

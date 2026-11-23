@@ -113,6 +113,7 @@ export interface LeadershipMember {
   name: string;
   role: string;
   tenure: string;
+  description: string;
   displayOrder: number;
   imageUrl?: string;
   createdAt: string;

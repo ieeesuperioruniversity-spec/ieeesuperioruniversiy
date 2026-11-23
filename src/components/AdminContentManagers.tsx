@@ -757,6 +757,7 @@ export function LeadershipManager({ notify, onUnauthorized }: { notify: Notify; 
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [tenure, setTenure] = useState("");
+  const [description, setDescription] = useState("");
   const [displayOrder, setDisplayOrder] = useState("0");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [adjustedPreviewUrl, setAdjustedPreviewUrl] = useState<string | null>(null);
@@ -799,6 +800,7 @@ export function LeadershipManager({ notify, onUnauthorized }: { notify: Notify; 
     setName("");
     setRole("");
     setTenure("");
+    setDescription("");
     setDisplayOrder("0");
     setImageFile(null);
     setAdjustedPreviewUrl(null);
@@ -812,6 +814,7 @@ export function LeadershipManager({ notify, onUnauthorized }: { notify: Notify; 
     setName(member.name);
     setRole(member.role);
     setTenure(member.tenure);
+    setDescription(member.description || "");
     setDisplayOrder(String(member.displayOrder));
     setImageFile(null);
     setAdjustedPreviewUrl(null);
@@ -830,6 +833,7 @@ export function LeadershipManager({ notify, onUnauthorized }: { notify: Notify; 
       form.set("name", name);
       form.set("role", role);
       form.set("tenure", tenure);
+      form.set("description", description);
       form.set("displayOrder", displayOrder);
       if (imageFile) form.set("image", imageFile);
       const response = await fetch(editing ? `/api/leadership/${editing.id}` : "/api/leadership", { method: editing ? "PUT" : "POST", body: form });
@@ -877,6 +881,9 @@ export function LeadershipManager({ notify, onUnauthorized }: { notify: Notify; 
             </div>
             <label htmlFor="leadership-tenure">Tenure line</label>
             <input id="leadership-tenure" required maxLength={120} value={tenure} onChange={(event) => setTenure(event.target.value)} placeholder="Advisor Since 2021" />
+            <label htmlFor="leadership-description">Description</label>
+            <textarea id="leadership-description" maxLength={2000} rows={5} value={description} onChange={(event) => setDescription(event.target.value)} placeholder="Write a short profile about this leader, their experience, and contributions." />
+            <small className="leadershipDescriptionHelp">Optional · up to 2,000 characters · shown in the View Profile popup.</small>
             <ImageFieldWithAdjuster
               label="Portrait Image"
               id="leadership-image"

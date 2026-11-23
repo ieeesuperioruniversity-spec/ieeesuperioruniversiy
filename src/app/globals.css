@@ -3402,6 +3402,11 @@ footer{
     font-size:12px;
 }
 
+.leadershipViewButton{margin-top:14px}
+.leadershipDescriptionHelp{display:block;margin-top:-8px;color:var(--muted);font-size:12px}
+.leadershipProfilePanel .publicTeamViewDetails{min-width:0}
+.leadershipProfileTenure{display:block;margin-top:12px;color:var(--muted);font-size:13px}
+
 .leadershipEmpty{
     max-width:560px;
     min-height:140px;
